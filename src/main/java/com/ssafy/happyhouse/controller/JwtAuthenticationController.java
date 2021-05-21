@@ -24,7 +24,7 @@ import com.ssafy.happyhouse.util.JwtTokenUtil;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/user")
+@RequestMapping("/jwt")
 public class JwtAuthenticationController {
 
 	@Autowired
@@ -70,7 +70,7 @@ public class JwtAuthenticationController {
 			System.out.println("여기 오니");
 		}
 	}
-	
+	//이부분에서 exception custom으로 처리해야하나?????
 
 	
 	

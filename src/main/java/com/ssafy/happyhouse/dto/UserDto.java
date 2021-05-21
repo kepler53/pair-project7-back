@@ -1,5 +1,7 @@
 package com.ssafy.happyhouse.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,7 @@ public class UserDto {
 	private String user_id;
 	private String user_pass;
 	private String user_nickname;
+	private List<String> checkedPrefers;
 	
 	public String getUser_id() {
 		return user_id;
@@ -33,20 +36,31 @@ public class UserDto {
 	public void setUser_nickname(String user_nickname) {
 		this.user_nickname = user_nickname;
 	}
+	
+	public List<String> getCheckedPrefers() {
+		return checkedPrefers;
+	}
+	public void setCheckedPrefers(List<String> checkedPrefers) {
+		this.checkedPrefers = checkedPrefers;
+	}
 	@Override
 	public String toString() {
-		return "UserDto [user_id=" + user_id + ", user_pass=" + user_pass + ", user_nickname=" + user_nickname + "]";
+		return "UserDto [user_id=" + user_id + ", user_pass=" + user_pass + ", user_nickname=" + user_nickname
+				+ ", checkedPrefers=" + checkedPrefers + "]";
 	}
-	public UserDto(String user_id, String user_pass, String user_nickname) {
+	public UserDto(String user_id, String user_pass, String user_nickname, List<String> checkedPrefers) {
 		super();
 		this.user_id = user_id;
 		this.user_pass = user_pass;
 		this.user_nickname = user_nickname;
+		this.checkedPrefers = checkedPrefers;
 	}
 	public UserDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	
 	
 	

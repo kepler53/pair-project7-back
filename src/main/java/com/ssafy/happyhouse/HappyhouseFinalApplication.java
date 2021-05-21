@@ -13,8 +13,4 @@ public class HappyhouseFinalApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HappyhouseFinalApplication.class, args);
 	}
-	
-	
-	
-
 }

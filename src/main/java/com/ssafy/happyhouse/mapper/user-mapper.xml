@@ -12,4 +12,17 @@
 		select count(*) from user_tb where user_id = #{user_id}
 	</select>
 	
+	<insert id="addUser">
+		insert into user_tb(user_id,user_pass) 
+		values (#{user_id},#{user_pass})	
+	</insert>
+	
+	<insert id="addPreference" parameterType="com.ssafy.happyhouse.dto.UserDto">
+		insert into preference_tb(user_id,convenience_name) 
+			values
+		<foreach collection="checkedPrefers" item="item" separator=",">
+		(#{user_id},#{item})
+		</foreach>
+	</insert>
+	
 </mapper>
