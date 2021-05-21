@@ -23,7 +23,7 @@ import com.ssafy.happyhouse.service.UserServiceImpl;
 import com.ssafy.happyhouse.util.JwtTokenUtil;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "X-AUTH-TOKEN",maxAge = 3600)
 @RequestMapping("/jwt")
 public class JwtAuthenticationController {
 
