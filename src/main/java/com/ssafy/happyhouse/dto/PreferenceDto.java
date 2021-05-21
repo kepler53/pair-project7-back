@@ -18,7 +18,7 @@ public class PreferenceDto {
 	}
 	@Override
 	public String toString() {
-		return "PreferenceDto [user_id=" + ", convenience_name=" + convenience_name + "]";
+		return convenience_name;
 	}
 	public PreferenceDto(String convenience_name) {
 		super();

@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 	//transcation을 사용해야하는 부분 : 회원을 등록하고 회원의 관심사를 추가적으로 등록해야한다.
 	@Override
 	public String enroll(UserDto userDto) {
-		
+		System.out.println(userDto);
 		userDto.setUser_pass(passwordEncoder.encode(userDto.getUser_pass()));
 //		System.out.println("패스워드는"+userDto.getUser_pass());
 		int result1 = template.getMapper(UserMapper.class).addUser(userDto);

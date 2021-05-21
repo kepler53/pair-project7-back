@@ -21,7 +21,7 @@
 		insert into preference_tb(user_id,convenience_name) 
 			values
 		<foreach collection="checkedPrefers" item="item" separator=",">
-		(#{user_id},#{item})
+		(#{user_id},#{item.convenience_name})
 		</foreach>
 	</insert>
 	

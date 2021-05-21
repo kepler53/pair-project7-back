@@ -45,8 +45,7 @@ public class UserDto {
 	}
 	@Override
 	public String toString() {
-		return "UserDto [user_id=" + user_id + ", user_pass=" + user_pass + ", user_nickname=" + user_nickname
-				+ ", checkedPrefers=" + checkedPrefers + "]";
+		return "UserDto [user_id=" + user_id + ", user_pass=" + user_pass + ", checkedPrefers=" + checkedPrefers + "]";
 	}
 	public UserDto(String user_id, String user_pass, String user_nickname, List<PreferenceDto> checkedPrefers) {
 		super();
