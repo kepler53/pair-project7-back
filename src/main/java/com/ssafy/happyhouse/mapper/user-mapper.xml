@@ -25,4 +25,14 @@
 		</foreach>
 	</insert>
 	
+	<delete id="deletePreference">
+		delete from preference_tb where user_id = #{user_id}
+	</delete>
+	
+	<update id="updateUser">
+		update user_tb
+		set user_pass = #{user_pass}
+		where user_id = #{user_id}
+	</update>
+	
 </mapper>

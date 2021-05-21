@@ -8,5 +8,5 @@ public interface UserService {
 	public String duplicateCheck(String id);
 //	public String enroll(UserDto userdto,String[] arr);
 	public String enroll(UserDto userDto);
-
+	public String update(UserDto userDto);
 }

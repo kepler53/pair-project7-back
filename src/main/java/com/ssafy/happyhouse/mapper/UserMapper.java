@@ -12,7 +12,12 @@ public interface UserMapper {
 	public int count();
 	
 	public int duplicateCheck(String user_id);
+	
 	public int addUser(UserDto userDto);
+	public int updateUser(UserDto userDto);
+
 	public int addPreference(UserDto userDto);
+	public int deletePreference(String user_id);
+	
 	
 }

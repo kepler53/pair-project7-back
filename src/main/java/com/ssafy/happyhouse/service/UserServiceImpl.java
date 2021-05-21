@@ -88,4 +88,32 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 			return "안됐어";
 		}
 	}
+
+	@Override
+	public String update(UserDto userDto) {
+		int result = template.getMapper(UserMapper.class).deletePreference(userDto.getUser_id());
+		
+		
+		userDto.setUser_pass(passwordEncoder.encode(userDto.getUser_pass()));
+		int result2 = template.getMapper(UserMapper.class).updateUser(userDto);
+		int result3 = template.getMapper(UserMapper.class).addPreference(userDto);
+		
+//		System.out.println("result는"+result);
+//		System.out.println("result2는"+result2);
+//		System.out.println("result3는"+result3);
+		if(result>0 &&result2>0&& result3>0) {
+			return "됐어";
+		}else {
+			return "안됐어";
+		}
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 }

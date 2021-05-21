@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -88,5 +89,33 @@ public class UserController {
 		String result = userService.enroll(userDto);
 		return new ResponseEntity<String>(result,HttpStatus.OK);
 	}
+	
+	@PutMapping()
+	public ResponseEntity<String> update(Principal principal,@RequestBody UserDto userDto){
+		
+		String user_id = principal.getName();
+		userDto.setUser_id(user_id);
+		
+		String result = userService.update(userDto);
+		
+		return new ResponseEntity<String>(result,HttpStatus.OK);
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
