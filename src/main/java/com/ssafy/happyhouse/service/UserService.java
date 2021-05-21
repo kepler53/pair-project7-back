@@ -9,4 +9,5 @@ public interface UserService {
 //	public String enroll(UserDto userdto,String[] arr);
 	public String enroll(UserDto userDto);
 	public String update(UserDto userDto);
+	public UserDto getUserInfo(String id);
 }

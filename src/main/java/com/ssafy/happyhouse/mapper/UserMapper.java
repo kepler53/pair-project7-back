@@ -18,6 +18,7 @@ public interface UserMapper {
 
 	public int addPreference(UserDto userDto);
 	public int deletePreference(String user_id);
+	public UserDto getUserInfo(String id);
 	
 	
 }

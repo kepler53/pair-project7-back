@@ -35,4 +35,19 @@
 		where user_id = #{user_id}
 	</update>
 	
+	
+	<select id="getUserInfo" resultMap="userInfo">
+		select user_id from user_tb where user_id = #{user_id};
+	</select>
+	
+	<select id="preference" resultType="com.ssafy.happyhouse.dto.PreferenceDto">
+		select convenience_name from preference_tb where user_id =#{user_id};
+	</select>
+	
+	<resultMap type="com.ssafy.happyhouse.dto.UserDto" id="userInfo">
+		<result property="user_id" column="user_id"/>
+		<collection property="checkedPrefers" column="user_id" javaType="list" ofType="com.ssafy.happyhouse.dto.PreferenceDto" select="preference"/>
+	</resultMap>
+	
+	
 </mapper>

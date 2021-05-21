@@ -108,6 +108,13 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 		}
 	}
 
+	@Override
+	public UserDto getUserInfo(String id) {
+		System.out.println(id);
+		UserDto userDto = template.getMapper(UserMapper.class).getUserInfo(id);
+		return userDto;
+	}
+
 	
 	
 	

@@ -78,6 +78,20 @@ public class UserController {
 //		return new ResponseEntity<String>(result,HttpStatus.OK);
 //	}
 	
+	
+	
+	@GetMapping("")
+	public ResponseEntity<UserDto> getUserInfo(Principal principal){
+		
+		String user_id = principal.getName();
+		
+		UserDto userDto = userService.getUserInfo(user_id);
+		System.out.println(userDto);
+		return new ResponseEntity<UserDto>(userDto,HttpStatus.OK);
+		
+	}
+	
+	
 	@PostMapping("/enroll")
 //	public ResponseEntity<String> enroll(@RequestBody UserDto userDto,@RequestParam(name = "checkedPrefers",required = false) String[] arr){	
 	public ResponseEntity<String> enroll(@RequestBody UserDto userDto){	
@@ -99,7 +113,6 @@ public class UserController {
 		String result = userService.update(userDto);
 		
 		return new ResponseEntity<String>(result,HttpStatus.OK);
-		
 		
 	}
 	

@@ -16,7 +16,7 @@ public class UserDto {
 	private String user_id;
 	private String user_pass;
 	private String user_nickname;
-	private List<String> checkedPrefers;
+	private List<PreferenceDto> checkedPrefers;
 	
 	public String getUser_id() {
 		return user_id;
@@ -37,10 +37,10 @@ public class UserDto {
 		this.user_nickname = user_nickname;
 	}
 	
-	public List<String> getCheckedPrefers() {
+	public List<PreferenceDto> getCheckedPrefers() {
 		return checkedPrefers;
 	}
-	public void setCheckedPrefers(List<String> checkedPrefers) {
+	public void setCheckedPrefers(List<PreferenceDto> checkedPrefers) {
 		this.checkedPrefers = checkedPrefers;
 	}
 	@Override
@@ -48,7 +48,7 @@ public class UserDto {
 		return "UserDto [user_id=" + user_id + ", user_pass=" + user_pass + ", user_nickname=" + user_nickname
 				+ ", checkedPrefers=" + checkedPrefers + "]";
 	}
-	public UserDto(String user_id, String user_pass, String user_nickname, List<String> checkedPrefers) {
+	public UserDto(String user_id, String user_pass, String user_nickname, List<PreferenceDto> checkedPrefers) {
 		super();
 		this.user_id = user_id;
 		this.user_pass = user_pass;
