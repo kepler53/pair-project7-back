@@ -50,4 +50,9 @@
 	</resultMap>
 	
 	
+	<delete id="deleteUser">
+		delete from user_tb where user_id = #{user_id}
+	</delete>
+	
+	
 </mapper>

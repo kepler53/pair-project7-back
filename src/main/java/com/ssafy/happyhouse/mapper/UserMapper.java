@@ -15,10 +15,12 @@ public interface UserMapper {
 	
 	public int addUser(UserDto userDto);
 	public int updateUser(UserDto userDto);
-
+	public int deleteUser(String id);
+	
 	public int addPreference(UserDto userDto);
 	public int deletePreference(String user_id);
 	public UserDto getUserInfo(String id);
+	
 	
 	
 }

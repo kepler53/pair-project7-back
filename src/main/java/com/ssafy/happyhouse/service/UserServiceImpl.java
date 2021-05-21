@@ -115,6 +115,18 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 		return userDto;
 	}
 
+	@Override
+	public String delete(String id) {
+		System.out.println(id);
+		int result = template.getMapper(UserMapper.class).deleteUser(id);
+		System.out.println(result);
+		if(result >0) {
+			return "됐어";
+		}else {
+			return "안됐어";
+		}
+	}
+
 	
 	
 	

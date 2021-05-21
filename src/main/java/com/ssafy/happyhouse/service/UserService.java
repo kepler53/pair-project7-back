@@ -10,4 +10,5 @@ public interface UserService {
 	public String enroll(UserDto userDto);
 	public String update(UserDto userDto);
 	public UserDto getUserInfo(String id);
+	public String delete(String id);
 }

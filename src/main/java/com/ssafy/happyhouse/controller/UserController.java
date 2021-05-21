@@ -96,7 +96,7 @@ public class UserController {
 	@PostMapping("/enroll")
 //	public ResponseEntity<String> enroll(@RequestBody UserDto userDto,@RequestParam(name = "checkedPrefers",required = false) String[] arr){	
 	public ResponseEntity<String> enroll(@RequestBody UserDto userDto){	
-		System.out.println(userDto);
+//		System.out.println(userDto);
 //		for (String string : arr) {
 //			System.out.println(string);
 //		}
@@ -110,19 +110,22 @@ public class UserController {
 		
 		String user_id = principal.getName();
 		userDto.setUser_id(user_id);
-		
+		System.out.println("update="+userDto);
 		String result = userService.update(userDto);
 		
 		return new ResponseEntity<String>(result,HttpStatus.OK);
 		
 	}
 	
-//	@DeleteMapping()
-//	public ResponseEntity<String> delete(Principal principal){
-//		
-//		
-//		
-//	} 
+	@DeleteMapping()
+	public ResponseEntity<String> delete(Principal principal){
+		String user_id = principal.getName();
+		
+		String result = userService.delete(user_id);
+		
+		return new ResponseEntity<String>(result,HttpStatus.OK);
+		
+	} 
 	
 	
 	
