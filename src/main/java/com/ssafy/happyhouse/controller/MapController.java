@@ -30,7 +30,7 @@ public class MapController {
 		MapDto mapDto = new MapDto();
 		
         try {
-            String addr = URLEncoder.encode("서울시 동작구", "UTF-8");  //주소입력
+            String addr = URLEncoder.encode(address, "UTF-8");  //주소입력
             String apiURL = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=" + addr; //json
             //String apiURL = "https://openapi.naver.com/v1/map/geocode.xml?query=" + addr; // xml
             URL url = new URL(apiURL);
