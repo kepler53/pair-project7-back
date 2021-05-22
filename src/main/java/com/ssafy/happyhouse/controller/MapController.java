@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.dto.MapDto;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "X-AUTH-TOKEN",maxAge = 3600)
 @RestController
 @RequestMapping("/map")
 public class MapController {
