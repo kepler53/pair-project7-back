@@ -153,7 +153,56 @@ public class MapController {
 		
 		
 		return new ResponseEntity<List<HouseDealDto>>(list,HttpStatus.OK);
-		
-	} 
+	}
+	
+	
+	@GetMapping("/legalcode")
+	public ResponseEntity<String> getLegalCode(@RequestParam(value = "lng") String lng, @RequestParam(value = "lat") String lat){
+//		System.out.println(lng+","+lat);
+		String legalcode = "";
+		try {
+        	String str = lng + "," + lat;
+            String apiURL = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords="+ str +"&output=json&orders=legalcode"; //json
+            //String apiURL = "https://openapi.naver.com/v1/map/geocode.xml?query=" + addr; // xml
+            URL url = new URL(apiURL);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("X-NCP-APIGW-API-KEY-ID", "09vzyngctu");
+            con.setRequestProperty("X-NCP-APIGW-API-KEY", "z1VHkKMWkWpnIhz7alV3oXpysduy3SSUgvkXdIEb");
+            int responseCode = con.getResponseCode();
+            BufferedReader br;
+            if(responseCode==200) { 
+                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            } else {  
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            }
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = br.readLine()) != null) {
+                response.append(inputLine);
+            }
+            br.close();
 
+            String result = response.toString();
+//            System.out.println(result);
+            
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
+//            System.out.println(jsonObject);
+            JSONArray results = (JSONArray) jsonObject.get("results");
+            for (int i = 0; i < results.size(); i++) {
+            	JSONObject object = (JSONObject) results.get(i);
+//            	System.out.println(object);
+            	JSONObject code =  (JSONObject) object.get("code");
+            	System.out.println(code);
+            	System.out.println(code.get("id"));
+            	legalcode = (String) code.get("id");
+            	legalcode = legalcode.substring(0, 5);
+            	System.out.println(legalcode);
+			}
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+		return new ResponseEntity<String>(legalcode,HttpStatus.OK);
+	}
 }
