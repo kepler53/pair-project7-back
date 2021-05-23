@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.dto.HouseDealDto;
+import com.ssafy.happyhouse.dto.LegalCodeDto;
 import com.ssafy.happyhouse.dto.MapDto;
 import com.ssafy.happyhouse.service.MapService;
 
@@ -157,11 +158,15 @@ public class MapController {
 	
 	
 	@GetMapping("/legalcode")
-	public ResponseEntity<String> getLegalCode(@RequestParam(value = "lng") String lng, @RequestParam(value = "lat") String lat){
+	public ResponseEntity<LegalCodeDto> getLegalCode(@RequestParam(value = "lng") String lng, @RequestParam(value = "lat") String lat){
 //		System.out.println(lng+","+lat);
 		String legalcode = "";
+		String city = "";
+		String gu = "";
+		String dong = "";
 		try {
         	String str = lng + "," + lat;
+        	System.out.println(str);
             String apiURL = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords="+ str +"&output=json&orders=legalcode"; //json
             //String apiURL = "https://openapi.naver.com/v1/map/geocode.xml?query=" + addr; // xml
             URL url = new URL(apiURL);
@@ -194,15 +199,34 @@ public class MapController {
             	JSONObject object = (JSONObject) results.get(i);
 //            	System.out.println(object);
             	JSONObject code =  (JSONObject) object.get("code");
-            	System.out.println(code);
-            	System.out.println(code.get("id"));
+//            	System.out.println(code);
+//            	System.out.println(code.get("id"));
             	legalcode = (String) code.get("id");
             	legalcode = legalcode.substring(0, 5);
-            	System.out.println(legalcode);
+//            	System.out.println(legalcode);
+            	
+				if(code.get("type").equals("L")) {
+					JSONObject region = (JSONObject) object.get("region");
+//					System.out.println(region);
+					JSONObject area1 = (JSONObject) region.get("area1");
+//					System.out.println(area1.get("name"));
+					JSONObject area2 = (JSONObject) region.get("area2");
+//					System.out.println(area2.get("name"));
+					JSONObject area3 = (JSONObject) region.get("area3");
+//					System.out.println(area3.get("name"));
+					city = (String) area1.get("name");
+					gu = (String) area2.get("name");
+					dong = (String) area3.get("name");
+					
+				}
 			}
         } catch (Exception e) {
             System.out.println(e);
         }
-		return new ResponseEntity<String>(legalcode,HttpStatus.OK);
+		
+		LegalCodeDto legalCodeDto = new LegalCodeDto(legalcode,city,gu,dong);
+		System.out.println(legalCodeDto);
+		
+		return new ResponseEntity<LegalCodeDto>(legalCodeDto,HttpStatus.OK);
 	}
 }
