@@ -73,8 +73,8 @@ public class MapController {
             for (int i = 0; i < addresses.size(); i++) {
 				JSONObject object = (JSONObject) addresses.get(i);
 				
-				System.out.println(object.get("x"));
-				System.out.println(object.get("y"));
+//				System.out.println(object.get("x"));
+//				System.out.println(object.get("y"));
 				
 				mapDto.setLatitude((String)object.get("y"));
 				mapDto.setLongtitude((String)object.get("x"));
@@ -217,7 +217,6 @@ public class MapController {
 					city = (String) area1.get("name");
 					gu = (String) area2.get("name");
 					dong = (String) area3.get("name");
-					
 				}
 			}
         } catch (Exception e) {

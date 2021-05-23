@@ -114,7 +114,6 @@ public class UserController {
 		String result = userService.update(userDto);
 		
 		return new ResponseEntity<String>(result,HttpStatus.OK);
-		
 	}
 	
 	@DeleteMapping()
