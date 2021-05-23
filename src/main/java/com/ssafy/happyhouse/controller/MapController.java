@@ -76,8 +76,8 @@ public class MapController {
 //				System.out.println(object.get("x"));
 //				System.out.println(object.get("y"));
 				
-				mapDto.setLatitude((String)object.get("y"));
-				mapDto.setLongtitude((String)object.get("x"));
+				mapDto.setLat((String)object.get("y"));
+				mapDto.setLng((String)object.get("x"));
 			}
         } catch (Exception e) {
             System.out.println(e);

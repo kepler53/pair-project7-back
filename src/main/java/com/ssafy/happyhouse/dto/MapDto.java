@@ -1,31 +1,34 @@
 package com.ssafy.happyhouse.dto;
 
 public class MapDto {
+	
+	
+
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
 	@Override
 	public String toString() {
-		return "MapDto [longtitude=" + longtitude + ", latitude=" + latitude + "]";
-	}
-	public String getLongtitude() {
-		return longtitude;
-	}
-	public void setLongtitude(String longtitude) {
-		this.longtitude = longtitude;
-	}
-	public String getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
+		return "MapDto [lng=" + lng + ", lat=" + lat + "]";
 	}
 	public MapDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MapDto(String longtitude, String latitude) {
+	private String lng; //경도
+	public MapDto(String lng, String lat) {
 		super();
-		this.longtitude = longtitude;
-		this.latitude = latitude;
+		this.lng = lng;
+		this.lat = lat;
 	}
-	private String longtitude; //경도
-	private String latitude; //위도
+	private String lat; //위도
 }
