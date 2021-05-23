@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 	//transcation을 사용해야하는 부분 : 회원을 등록하고 회원의 관심사를 추가적으로 등록해야한다.
 	@Override
 	public String enroll(UserDto userDto) {
-		System.out.println(userDto);
+//		System.out.println(userDto);
 		userDto.setUser_pass(passwordEncoder.encode(userDto.getUser_pass()));
 //		System.out.println("패스워드는"+userDto.getUser_pass());
 		int result1 = template.getMapper(UserMapper.class).addUser(userDto);
@@ -110,16 +110,16 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 
 	@Override
 	public UserDto getUserInfo(String id) {
-		System.out.println(id);
+//		System.out.println(id);
 		UserDto userDto = template.getMapper(UserMapper.class).getUserInfo(id);
 		return userDto;
 	}
 
 	@Override
 	public String delete(String id) {
-		System.out.println(id);
+//		System.out.println(id);
 		int result = template.getMapper(UserMapper.class).deleteUser(id);
-		System.out.println(result);
+//		System.out.println(result);
 		if(result >0) {
 			return "됐어";
 		}else {
