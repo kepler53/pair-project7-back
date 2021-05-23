@@ -37,7 +37,7 @@
 	
 	
 	<select id="getUserInfo" resultMap="userInfo">
-		select user_id from user_tb where user_id = #{user_id};
+		select user_id, user_admin from user_tb where user_id = #{user_id};
 	</select>
 	
 	<select id="preference" resultType="com.ssafy.happyhouse.dto.PreferenceDto">

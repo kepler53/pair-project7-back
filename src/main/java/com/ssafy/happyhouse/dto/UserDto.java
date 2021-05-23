@@ -15,7 +15,8 @@ public class UserDto {
 	
 	private String user_id;
 	private String user_pass;
-	private String user_nickname;
+	private String user_admin;
+	
 	private List<PreferenceDto> checkedPrefers;
 	
 	public String getUser_id() {
@@ -30,12 +31,7 @@ public class UserDto {
 	public void setUser_pass(String user_pass) {
 		this.user_pass = user_pass;
 	}
-	public String getUser_nickname() {
-		return user_nickname;
-	}
-	public void setUser_nickname(String user_nickname) {
-		this.user_nickname = user_nickname;
-	}
+
 	
 	public List<PreferenceDto> getCheckedPrefers() {
 		return checkedPrefers;
@@ -45,15 +41,25 @@ public class UserDto {
 	}
 	@Override
 	public String toString() {
-		return "UserDto [user_id=" + user_id + ", user_pass=" + user_pass + ", checkedPrefers=" + checkedPrefers + "]";
+		return "UserDto [user_id=" + user_id + ", user_pass=" + user_pass +
+				", user_admin= " + user_admin +
+				", checkedPrefers=" + checkedPrefers + "]";
 	}
 	public UserDto(String user_id, String user_pass, String user_nickname, List<PreferenceDto> checkedPrefers) {
 		super();
 		this.user_id = user_id;
 		this.user_pass = user_pass;
-		this.user_nickname = user_nickname;
+
 		this.checkedPrefers = checkedPrefers;
 	}
+	
+	public String getUser_admin() {
+		return user_admin;
+	}
+	public void setUser_admin(String user_admin) {
+		this.user_admin = user_admin;
+	}
+	
 	public UserDto() {
 		super();
 		// TODO Auto-generated constructor stub
