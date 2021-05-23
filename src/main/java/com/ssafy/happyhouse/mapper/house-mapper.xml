@@ -5,4 +5,10 @@
 	<select id="getHouseList" resultType="com.ssafy.happyhouse.dto.HouseDealDto">
 		select * from housedeal_tb where dong = #{dong}
 	</select>
+	
+	<insert id="addHouseDeal">
+		insert into housedeal_tb(dong,aptName,dealAmount,buildYear,floor,rentMoney,registration,lng,lat)
+		values (#{dong},#{aptName},#{dealAmount},#{buildYear},#{floor},#{rentMoney},now(),#{lng},#{lat})
+	</insert>
+	
 </mapper>

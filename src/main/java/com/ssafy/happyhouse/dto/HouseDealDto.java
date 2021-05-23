@@ -109,6 +109,14 @@ public class HouseDealDto {
 	public void setLng(String lng) {
 		this.lng = lng;
 	}
+	
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	
 	private int no;
 	private String dong;
 	private String aptName;
@@ -118,6 +126,8 @@ public class HouseDealDto {
 	private String floor;
 	private String jibun;
 	private String type;
+	
+	private String area;
 	private String rentMoney;
 	private Date registration;
 	private String lat;
