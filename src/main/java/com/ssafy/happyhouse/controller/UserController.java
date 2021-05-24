@@ -57,7 +57,7 @@ public class UserController {
 	@GetMapping("/test")
 	public String test(Principal principal) {
 		
-		System.out.println(principal.getName());
+//		System.out.println(principal.getName());
 				
 //		String name = claims.get("name", String.class);
 //      System.out.println("name: " + name);
@@ -149,7 +149,7 @@ public class UserController {
 		
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(str);
-        System.out.println(str);
+//        System.out.println(str);
 //        System.out.println(jsonObject.get("user_id"));
 //        System.out.println(jsonObject.get("user_pass"));
 //        System.out.println(jsonObject.get("checkedPrefers"));
@@ -158,14 +158,14 @@ public class UserController {
 		JSONArray cafe = (JSONArray) checkedPrefers.get("cafe");
 		for (int i = 0; i < cafe.size(); i++) {
 			JSONObject cafeObject = (JSONObject) cafe.get(i);
-			System.out.println(cafeObject.get("name"));
-			pList.add(new PreferenceDto("커피전문점",(String)cafeObject.get("name")));
+//			System.out.println(cafeObject.get("name"));
+			pList.add(new PreferenceDto("커피전문점",(String)cafeObject.get("name"),i+1));
 		}
 		
 		JSONArray conveninence = (JSONArray) checkedPrefers.get("convenience");
 		for (int i = 0; i < conveninence.size(); i++) {
 			JSONObject convObject = (JSONObject) conveninence.get(i);
-			pList.add(new PreferenceDto("편의점",(String)convObject.get("name")));
+			pList.add(new PreferenceDto("편의점",(String)convObject.get("name"),i+1));
 		}
 		
 		UserDto userDto = new UserDto();
@@ -178,7 +178,7 @@ public class UserController {
 				
 		
 		String result = userService.enroll(userDto);
-		return new ResponseEntity<String>("ss",HttpStatus.OK);
+		return new ResponseEntity<String>("로그인이 성공되었습니다.",HttpStatus.OK);
 	}
 	
 	@PutMapping()

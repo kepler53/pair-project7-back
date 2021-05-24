@@ -17,7 +17,7 @@ public class UserDto {
 	@Override
 	public String toString() {
 		return "UserDto [user_id=" + user_id + ", user_pass=" + user_pass + ", user_admin=" + user_admin
-				+ ", checkedPrefer=" + checkedPrefer + ", checkedPrefers=" + checkedPrefers + "]";
+				+  ", checkedPrefers=" + checkedPrefers + "]";
 	}
 	public String getUser_id() {
 		return user_id;
@@ -37,12 +37,7 @@ public class UserDto {
 	public void setUser_admin(String user_admin) {
 		this.user_admin = user_admin;
 	}
-	public String getCheckedPrefer() {
-		return checkedPrefer;
-	}
-	public void setCheckedPrefer(String checkedPrefer) {
-		this.checkedPrefer = checkedPrefer;
-	}
+
 	public List<PreferenceDto> getCheckedPrefers() {
 		return checkedPrefers;
 	}
@@ -51,7 +46,7 @@ public class UserDto {
 	}
 	private String user_pass;
 	private String user_admin;
-	private String checkedPrefer;
+
 	private List<PreferenceDto> checkedPrefers;
 	
 	
