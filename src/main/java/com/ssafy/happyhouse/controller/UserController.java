@@ -103,11 +103,11 @@ public class UserController {
 			List<PreferenceDto> pList = userDto.getCheckedPrefers();
 			
 			for (int i = 0; i < pList.size(); i++) {
-				if(pList.get(i).getCategory().equals("cafe")) {
+				if(pList.get(i).getCategory().equals("커피전문점")) {
 					JSONObject sObject = new JSONObject();
 					sObject.put("name", pList.get(i).getName());
 					cafeArray.add(sObject);
-				}else if(pList.get(i).getCategory().equals("convenience")) {
+				}else if(pList.get(i).getCategory().equals("편의점")) {
 					JSONObject sObject = new JSONObject();
 					sObject.put("name", pList.get(i).getName());
 					convenienceArray.add(sObject);
@@ -159,13 +159,13 @@ public class UserController {
 		for (int i = 0; i < cafe.size(); i++) {
 			JSONObject cafeObject = (JSONObject) cafe.get(i);
 			System.out.println(cafeObject.get("name"));
-			pList.add(new PreferenceDto("cafe",(String)cafeObject.get("name")));
+			pList.add(new PreferenceDto("커피전문점",(String)cafeObject.get("name")));
 		}
 		
 		JSONArray conveninence = (JSONArray) checkedPrefers.get("convenience");
 		for (int i = 0; i < conveninence.size(); i++) {
 			JSONObject convObject = (JSONObject) conveninence.get(i);
-			pList.add(new PreferenceDto("convenience",(String)convObject.get("name")));
+			pList.add(new PreferenceDto("편의점",(String)convObject.get("name")));
 		}
 		
 		UserDto userDto = new UserDto();
