@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.happyhouse.dto.HouseDealDto;
 import com.ssafy.happyhouse.dto.LegalCodeDto;
 import com.ssafy.happyhouse.dto.MapDto;
+import com.ssafy.happyhouse.service.ConvenienceService;
 import com.ssafy.happyhouse.service.MapService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "X-AUTH-TOKEN",maxAge = 3600)
@@ -33,6 +35,9 @@ public class MapController {
 	
 	@Autowired
 	private MapService mapservice;
+	
+	@Autowired
+	private ConvenienceService cservice;
 	
 	@GetMapping("/{str}")
 	public ResponseEntity<MapDto> getMapInfo(@PathVariable("str") String address){
@@ -157,16 +162,22 @@ public class MapController {
 	}
 	
 	
+	
+	
 	@GetMapping("/legalcode")
-	public ResponseEntity<LegalCodeDto> getLegalCode(@RequestParam(value = "lng") String lng, @RequestParam(value = "lat") String lat){
+	public ResponseEntity<LegalCodeDto> getLegalCode(Principal principal,@RequestParam(value = "lng") String lng, @RequestParam(value = "lat") String lat){
 //		System.out.println(lng+","+lat);
+		String id = principal.getName();
 		String legalcode = "";
 		String city = "";
 		String gu = "";
 		String dong = "";
+//		Map<String, Object> map = null;
+//		map.put("legalDto", dto);
+//		map.put("");
 		try {
         	String str = lng + "," + lat;
-        	System.out.println(str);
+//        	System.out.println(str);
             String apiURL = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords="+ str +"&output=json&orders=legalcode"; //json
             //String apiURL = "https://openapi.naver.com/v1/map/geocode.xml?query=" + addr; // xml
             URL url = new URL(apiURL);
@@ -224,7 +235,10 @@ public class MapController {
         }
 		
 		LegalCodeDto legalCodeDto = new LegalCodeDto(legalcode,city,gu,dong);
-		System.out.println(legalCodeDto);
+//		System.out.println(legalCodeDto);
+		
+//		int result = cservice.getConvenienceScore(id, lat, lng);
+//		System.out.println(result);
 		
 		return new ResponseEntity<LegalCodeDto>(legalCodeDto,HttpStatus.OK);
 	}

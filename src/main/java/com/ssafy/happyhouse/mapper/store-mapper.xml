@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.mapper.StoreMapper">
+
+	<select id="getStoreCount" parameterType="com.ssafy.happyhouse.dto.UserDto" resultType="int">
+		<![CDATA[
+		SELECT count(*)
+		FROM store_tb
+		where (6371*acos(cos(radians(#{lng}))*cos(radians(store_latitude))*cos(radians(store_longitude)
+			-radians(#{lat}))+sin(radians(#{lng}))*sin(radians(store_latitude)))) <= 0.5 and 
+			store_classify_small in (select category from preference_tb where user_id = #{userDto.user_id})
+		]]>
+	</select>
+	
+	<select id="getEachCount"  resultType="int">
+		<![CDATA[
+		SELECT count(*)
+		FROM store_tb
+		where (6371*acos(cos(radians(#{lng}))*cos(radians(store_latitude))*cos(radians(store_longitude)
+			-radians(#{lat}))+sin(radians(#{lng}))*sin(radians(store_latitude)))) <= 0.5 and 
+			store_name LIKE CONCAT('%',#{name},'%')
+		]]>
+	</select>
+	
+	<select id="getCategory" resultType="int">
+		select count(c.category)
+		from (select distinct category from preference_tb where user_id = #{name}) as c
+	</select>
+	
+	<select id="getWeight" resultType="int">
+		select weight from preference_tb where user_id = #{id} and name = #{name};
+	</select>
+
+</mapper>
