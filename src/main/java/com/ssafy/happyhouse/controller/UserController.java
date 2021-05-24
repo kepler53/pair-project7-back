@@ -100,7 +100,7 @@ public class UserController {
 	}
 	
 	
-	@PostMapping("/enroll")
+	@PostMapping(value ="/enroll", produces = "application/json")
 //	public ResponseEntity<String> enroll(@RequestBody UserDto userDto,@RequestParam(name = "checkedPrefers",required = false) String[] arr){	
 	public ResponseEntity<String> enroll(@RequestBody String str) throws ParseException{	
 //		System.out.println(userDto);
