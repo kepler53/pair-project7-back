@@ -3,6 +3,7 @@ package com.ssafy.happyhouse.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -89,13 +90,49 @@ public class UserController {
 	
 	
 	@GetMapping("")
-	public ResponseEntity<UserDto> getUserInfo(Principal principal){
+	public ResponseEntity<JSONObject> getUserInfo(Principal principal){
 		
 		String user_id = principal.getName();
 		
 		UserDto userDto = userService.getUserInfo(user_id);
+		
+		JSONObject jsonObject = new JSONObject();
+		try {
+			JSONArray cafeArray = new JSONArray();
+			JSONArray convenienceArray = new JSONArray();
+			List<PreferenceDto> pList = userDto.getCheckedPrefers();
+			
+			for (int i = 0; i < pList.size(); i++) {
+				if(pList.get(i).getCategory().equals("cafe")) {
+					JSONObject sObject = new JSONObject();
+					sObject.put("name", pList.get(i).getName());
+					cafeArray.add(sObject);
+				}else if(pList.get(i).getCategory().equals("convenience")) {
+					JSONObject sObject = new JSONObject();
+					sObject.put("name", pList.get(i).getName());
+					convenienceArray.add(sObject);
+				}
+			}
+			
+			
+			JSONObject checkedPrefers = new JSONObject();
+			checkedPrefers.put("cafe",cafeArray);
+			checkedPrefers.put("convenience",convenienceArray);
+			
+			jsonObject.put("user_id", userDto.getUser_id());
+			jsonObject.put("user_pass", userDto.getUser_pass());
+			jsonObject.put("user_admin",userDto.getUser_admin());
+			jsonObject.put("checkedPrefers", checkedPrefers);
+			
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
 //		System.out.println(userDto);
-		return new ResponseEntity<UserDto>(userDto,HttpStatus.OK);
+		return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
 		
 	}
 	
@@ -112,22 +149,23 @@ public class UserController {
 		
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(str);
-        System.out.println(jsonObject.get("user_id"));
-        System.out.println(jsonObject.get("user_pass"));
-        System.out.println(jsonObject.get("checkedPrefers"));
+        System.out.println(str);
+//        System.out.println(jsonObject.get("user_id"));
+//        System.out.println(jsonObject.get("user_pass"));
+//        System.out.println(jsonObject.get("checkedPrefers"));
 		JSONObject checkedPrefers = (JSONObject) jsonObject.get("checkedPrefers");
 		
 		JSONArray cafe = (JSONArray) checkedPrefers.get("cafe");
 		for (int i = 0; i < cafe.size(); i++) {
 			JSONObject cafeObject = (JSONObject) cafe.get(i);
 			System.out.println(cafeObject.get("name"));
-			pList.add(new PreferenceDto("커피전문점",(String)cafeObject.get("name")));
+			pList.add(new PreferenceDto("cafe",(String)cafeObject.get("name")));
 		}
 		
 		JSONArray conveninence = (JSONArray) checkedPrefers.get("convenience");
 		for (int i = 0; i < conveninence.size(); i++) {
 			JSONObject convObject = (JSONObject) conveninence.get(i);
-			pList.add(new PreferenceDto("편의점",(String)convObject.get("name")));
+			pList.add(new PreferenceDto("convenience",(String)convObject.get("name")));
 		}
 		
 		UserDto userDto = new UserDto();
@@ -136,8 +174,8 @@ public class UserController {
 		userDto.setUser_pass((String)jsonObject.get("user_pass"));
 		userDto.setCheckedPrefers(pList);
 		
-		System.out.println(userDto);
-		
+//		System.out.println(userDto);
+				
 		
 		String result = userService.enroll(userDto);
 		return new ResponseEntity<String>("ss",HttpStatus.OK);
