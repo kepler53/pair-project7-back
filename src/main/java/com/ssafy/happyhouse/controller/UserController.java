@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.controller;
 
 import java.security.Principal;
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -185,7 +186,7 @@ public class UserController {
 	//위의 getmapping을 이용해 바꿔주기
 	//원래는 RequestBody를 받아옴
 	@PutMapping()
-	public ResponseEntity<String> update(Principal principal,@RequestBody String str) throws ParseException{
+	public ResponseEntity<String> update(Principal principal,@RequestBody String str) throws ParseException, SQLSyntaxErrorException{
 		
 //		String user_id = principal.getName();
 //		userDto.setUser_id(user_id);
@@ -220,6 +221,7 @@ public class UserController {
 		userDto.setUser_id((String)jsonObject.get("user_id"));
 		userDto.setUser_pass((String)jsonObject.get("user_pass"));
 		userDto.setCheckedPrefers(pList);
+		
 		
 		String result = userService.update(userDto);
 		

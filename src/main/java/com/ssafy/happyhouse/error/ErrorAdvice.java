@@ -1,5 +1,7 @@
 package com.ssafy.happyhouse.error;
 
+import java.sql.SQLSyntaxErrorException;
+
 import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,12 @@ public class ErrorAdvice {
 	public ResponseEntity<String> parseException(){
 		System.out.println("parse exception 일어났어");
 		return new ResponseEntity<String>("파싱 문제",HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@ExceptionHandler(SQLSyntaxErrorException.class)
+	public ResponseEntity<String> nullException(){
+		System.out.println("널 값을 넣었어");
+		return new ResponseEntity<String>("선호하는 것을 하나 이상 택해주세요",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	

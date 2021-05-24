@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.service;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 
 import lombok.RequiredArgsConstructor;
@@ -90,9 +91,8 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 	}
 
 	@Override
-	public String update(UserDto userDto){
-
-		
+	public String update(UserDto userDto) throws SQLSyntaxErrorException {
+	
 		int result = template.getMapper(UserMapper.class).deletePreference(userDto.getUser_id());
 		
 		
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 		if(result>0 &&result2>0&& result3>0) {
 			return "됐어";
 		}else {
-			return "안됐어";
+			throw new SQLSyntaxErrorException();
 		}
 	}
 
