@@ -181,12 +181,46 @@ public class UserController {
 		return new ResponseEntity<String>("로그인이 성공되었습니다.",HttpStatus.OK);
 	}
 	
+	
+	//위의 getmapping을 이용해 바꿔주기
+	//원래는 RequestBody를 받아옴
 	@PutMapping()
-	public ResponseEntity<String> update(Principal principal,@RequestBody UserDto userDto){
+	public ResponseEntity<String> update(Principal principal,@RequestBody String str) throws ParseException{
 		
-		String user_id = principal.getName();
-		userDto.setUser_id(user_id);
-//		System.out.println("update="+userDto);
+//		String user_id = principal.getName();
+//		userDto.setUser_id(user_id);
+////		System.out.println("update="+userDto);
+//		String result = userService.update(userDto);
+		
+		List<PreferenceDto> pList = new ArrayList<PreferenceDto>();
+		
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(str);
+//        System.out.println(str);
+//        System.out.println(jsonObject.get("user_id"));
+//        System.out.println(jsonObject.get("user_pass"));
+//        System.out.println(jsonObject.get("checkedPrefers"));
+		JSONObject checkedPrefers = (JSONObject) jsonObject.get("checkedPrefers");
+		
+		JSONArray cafe = (JSONArray) checkedPrefers.get("cafe");
+		for (int i = 0; i < cafe.size(); i++) {
+			JSONObject cafeObject = (JSONObject) cafe.get(i);
+//			System.out.println(cafeObject.get("name"));
+			pList.add(new PreferenceDto("커피전문점",(String)cafeObject.get("name"),i+1));
+		}
+		
+		JSONArray conveninence = (JSONArray) checkedPrefers.get("convenience");
+		for (int i = 0; i < conveninence.size(); i++) {
+			JSONObject convObject = (JSONObject) conveninence.get(i);
+			pList.add(new PreferenceDto("편의점",(String)convObject.get("name"),i+1));
+		}
+		
+		UserDto userDto = new UserDto();
+		
+		userDto.setUser_id((String)jsonObject.get("user_id"));
+		userDto.setUser_pass((String)jsonObject.get("user_pass"));
+		userDto.setCheckedPrefers(pList);
+		
 		String result = userService.update(userDto);
 		
 		return new ResponseEntity<String>(result,HttpStatus.OK);

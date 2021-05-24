@@ -90,7 +90,9 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 	}
 
 	@Override
-	public String update(UserDto userDto) {
+	public String update(UserDto userDto){
+
+		
 		int result = template.getMapper(UserMapper.class).deletePreference(userDto.getUser_id());
 		
 		
