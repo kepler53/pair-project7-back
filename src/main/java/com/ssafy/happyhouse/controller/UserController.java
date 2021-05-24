@@ -1,7 +1,13 @@
 package com.ssafy.happyhouse.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.happyhouse.dto.PreferenceDto;
 import com.ssafy.happyhouse.dto.UserDto;
 import com.ssafy.happyhouse.service.UserServiceImpl;
 
@@ -34,7 +41,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/checkDuplicate/{user_id}",method = RequestMethod.GET)
 	private String checkDuplicate(@PathVariable("user_id") String user_id) {
-		System.out.println(user_id);
+//		System.out.println(user_id);
 		String str = userService.duplicateCheck(user_id);
 //		System.out.println(user_id);
 //		String str = "너야";
@@ -87,7 +94,7 @@ public class UserController {
 		String user_id = principal.getName();
 		
 		UserDto userDto = userService.getUserInfo(user_id);
-		System.out.println(userDto);
+//		System.out.println(userDto);
 		return new ResponseEntity<UserDto>(userDto,HttpStatus.OK);
 		
 	}
@@ -95,14 +102,45 @@ public class UserController {
 	
 	@PostMapping("/enroll")
 //	public ResponseEntity<String> enroll(@RequestBody UserDto userDto,@RequestParam(name = "checkedPrefers",required = false) String[] arr){	
-	public ResponseEntity<String> enroll(@RequestBody UserDto userDto){	
+	public ResponseEntity<String> enroll(@RequestBody String str) throws ParseException{	
 //		System.out.println(userDto);
 //		for (String string : arr) {
 //			System.out.println(string);
 //		}
 		
+		List<PreferenceDto> pList = new ArrayList<PreferenceDto>();
+		
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(str);
+        System.out.println(jsonObject.get("user_id"));
+        System.out.println(jsonObject.get("user_pass"));
+        System.out.println(jsonObject.get("checkedPrefers"));
+		JSONObject checkedPrefers = (JSONObject) jsonObject.get("checkedPrefers");
+		
+		JSONArray cafe = (JSONArray) checkedPrefers.get("cafe");
+		for (int i = 0; i < cafe.size(); i++) {
+			JSONObject cafeObject = (JSONObject) cafe.get(i);
+			System.out.println(cafeObject.get("name"));
+			pList.add(new PreferenceDto("커피전문점",(String)cafeObject.get("name")));
+		}
+		
+		JSONArray conveninence = (JSONArray) checkedPrefers.get("convenience");
+		for (int i = 0; i < conveninence.size(); i++) {
+			JSONObject convObject = (JSONObject) conveninence.get(i);
+			pList.add(new PreferenceDto("편의점",(String)convObject.get("name")));
+		}
+		
+		UserDto userDto = new UserDto();
+		
+		userDto.setUser_id((String)jsonObject.get("user_id"));
+		userDto.setUser_pass((String)jsonObject.get("user_pass"));
+		userDto.setCheckedPrefers(pList);
+		
+		System.out.println(userDto);
+		
+		
 		String result = userService.enroll(userDto);
-		return new ResponseEntity<String>(result,HttpStatus.OK);
+		return new ResponseEntity<String>("ss",HttpStatus.OK);
 	}
 	
 	@PutMapping()
@@ -110,7 +148,7 @@ public class UserController {
 		
 		String user_id = principal.getName();
 		userDto.setUser_id(user_id);
-		System.out.println("update="+userDto);
+//		System.out.println("update="+userDto);
 		String result = userService.update(userDto);
 		
 		return new ResponseEntity<String>(result,HttpStatus.OK);

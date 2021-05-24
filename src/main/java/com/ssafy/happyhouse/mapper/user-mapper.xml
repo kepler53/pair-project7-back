@@ -18,10 +18,10 @@
 	</insert>
 	
 	<insert id="addPreference" parameterType="com.ssafy.happyhouse.dto.UserDto">
-		insert into preference_tb(user_id,convenience_name) 
+		insert into preference_tb(user_id,category,name) 
 			values
 		<foreach collection="checkedPrefers" item="item" separator=",">
-		(#{user_id},#{item.convenience_name})
+		(#{user_id},#{item.category},#{item.name})
 		</foreach>
 	</insert>
 	
@@ -41,7 +41,7 @@
 	</select>
 	
 	<select id="preference" resultType="com.ssafy.happyhouse.dto.PreferenceDto">
-		select convenience_name from preference_tb where user_id =#{user_id};
+		select category,name from preference_tb where user_id =#{user_id};
 	</select>
 	
 	<resultMap type="com.ssafy.happyhouse.dto.UserDto" id="userInfo">

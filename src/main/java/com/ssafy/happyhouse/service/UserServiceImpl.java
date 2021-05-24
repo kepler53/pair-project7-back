@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 
 	@Override
 	public String duplicateCheck(String id) {
-		System.out.println(id);
+//		System.out.println(id);
 		int result = template.getMapper(UserMapper.class).duplicateCheck(id);
 		if(result >0) {
 			return "cannot use";
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserDetailsService , UserService {
 //		System.out.println("패스워드는"+userDto.getUser_pass());
 		int result1 = template.getMapper(UserMapper.class).addUser(userDto);
 		int result2 = template.getMapper(UserMapper.class).addPreference(userDto);
-		System.out.println("result2는" + result2);
+//		System.out.println("result2는" + result2);
 		if(result1 >0) {
 			return "됐어";
 		}else {
