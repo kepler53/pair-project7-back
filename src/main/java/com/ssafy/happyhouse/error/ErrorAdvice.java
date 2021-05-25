@@ -20,6 +20,12 @@ public class ErrorAdvice {
 		return new ResponseEntity<String>("token만료",HttpStatus.UNAUTHORIZED);
 	}
 	
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<String> illegalArgument(){
+		System.out.println("token 없어");
+		return new ResponseEntity<String>("token이 없어",HttpStatus.UNAUTHORIZED);
+	}
+	
 	@ExceptionHandler(BadCredentialsException.class)
 	public ResponseEntity<String> badcredential(){
 		System.out.println("여기서 안잡아??? BadCredentialsException");
@@ -37,6 +43,7 @@ public class ErrorAdvice {
 		System.out.println("널 값을 넣었어");
 		return new ResponseEntity<String>("선호하는 것을 하나 이상 택해주세요",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
 	
 	
 }
