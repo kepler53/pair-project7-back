@@ -5,6 +5,7 @@ import java.sql.SQLSyntaxErrorException;
 import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +14,8 @@ import io.jsonwebtoken.ExpiredJwtException;
 
 @ControllerAdvice
 public class ErrorAdvice {
+	
+	
 
 	@ExceptionHandler(ExpiredJwtException.class)
 	public ResponseEntity<String> expriedJwt(){
@@ -44,6 +47,16 @@ public class ErrorAdvice {
 		return new ResponseEntity<String>("선호하는 것을 하나 이상 택해주세요",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<String> accessException(){
+		System.out.println("access denied");
+		return new ResponseEntity<String>("접근 권한",HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<String> Exception(){
+		return new ResponseEntity<String>("Internal Server Error",HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	
 }
