@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.dto.HouseInfoDto;
 import com.ssafy.happyhouse.dto.PreferenceDto;
 import com.ssafy.happyhouse.dto.UserDto;
 import com.ssafy.happyhouse.mapper.StoreMapper;
@@ -25,7 +26,7 @@ public class ConvenienceServiceImpl implements ConvenienceService {
 	
 	
 	@Override
-	public int getConvenienceScore(String id, String lat, String lng) {
+	public HouseInfoDto getConvenienceScore(String id, String lat, String lng,String dong) {
 		
 		float score = 0.0f;
 
@@ -45,7 +46,7 @@ public class ConvenienceServiceImpl implements ConvenienceService {
 //			System.out.println(preferenceDto);
 //		}
 		
-		int countList = template.getMapper(StoreMapper.class).getStoreCount(userDto, lng, lat); //전체 갯수
+		int countList = template.getMapper(StoreMapper.class).getStoreCount(userDto, lng, lat,dong); //전체 갯수
 		
 		Map<String, Integer> sebu = new HashMap<String, Integer>();
 		//카페 갯수
@@ -55,10 +56,11 @@ public class ConvenienceServiceImpl implements ConvenienceService {
 				
 				int weight = template.getMapper(StoreMapper.class).getWeight(id, pList.get(i).getName());
 				
-				int result = template.getMapper(StoreMapper.class).getEachCount(str,lng,lat);
+				int result = template.getMapper(StoreMapper.class).getEachCount(str,lng,lat,dong);
 				if(result>0) {
 					score += categoryPercent*weights[weight];
 					System.out.println(score);
+					
 				}
 				sebu.put(pList.get(i).getName(), result);
 			}
@@ -66,7 +68,7 @@ public class ConvenienceServiceImpl implements ConvenienceService {
 				String str = pList.get(i).getName();
 				int weight = template.getMapper(StoreMapper.class).getWeight(id, pList.get(i).getName());
 				
-				int result = template.getMapper(StoreMapper.class).getEachCount(str,lng,lat);
+				int result = template.getMapper(StoreMapper.class).getEachCount(str,lng,lat,dong);
 				if(result>0) {
 					score += categoryPercent*weights[weight];
 					System.out.println(score);
@@ -84,8 +86,13 @@ public class ConvenienceServiceImpl implements ConvenienceService {
 		System.out.println(score);
 //		System.out.println(countList);
 		
+		String scoreVal = String.valueOf(score);
 		
-		return 0;
+		HouseInfoDto houseInfo = new HouseInfoDto(scoreVal,sebu);
+		
+		
+		
+		return houseInfo;
 	}
 
 }

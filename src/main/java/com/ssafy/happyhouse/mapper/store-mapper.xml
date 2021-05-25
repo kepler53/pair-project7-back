@@ -6,9 +6,10 @@
 		<![CDATA[
 		SELECT count(*)
 		FROM store_tb
-		where (6371*acos(cos(radians(#{lng}))*cos(radians(store_latitude))*cos(radians(store_longitude)
-			-radians(#{lat}))+sin(radians(#{lng}))*sin(radians(store_latitude)))) <= 0.5 and 
-			store_classify_small in (select category from preference_tb where user_id = #{userDto.user_id})
+		where store_dong = #{dong} 
+		and store_classify_small in (select category from preference_tb where user_id = #{userDto.user_id}) 
+		and (6371*acos(cos(radians(#{lng}))*cos(radians(store_latitude))*cos(radians(store_longitude)
+			-radians(#{lat}))+sin(radians(#{lng}))*sin(radians(store_latitude)))) <= 0.5 
 		]]>
 	</select>
 	
@@ -16,9 +17,10 @@
 		<![CDATA[
 		SELECT count(*)
 		FROM store_tb
-		where (6371*acos(cos(radians(#{lng}))*cos(radians(store_latitude))*cos(radians(store_longitude)
-			-radians(#{lat}))+sin(radians(#{lng}))*sin(radians(store_latitude)))) <= 0.5 and 
-			store_name LIKE CONCAT('%',#{name},'%')
+		where store_dong = #{dong} 
+			and store_name LIKE CONCAT('%',#{name},'%')  
+			and (6371*acos(cos(radians(#{lng}))*cos(radians(store_latitude))*cos(radians(store_longitude)
+			-radians(#{lat}))+sin(radians(#{lng}))*sin(radians(store_latitude)))) <= 0.5 
 		]]>
 	</select>
 	

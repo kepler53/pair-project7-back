@@ -10,9 +10,9 @@ public interface StoreMapper {
 	
 	public int getCategory(@Param("name")String id);
 	
-	public int getStoreCount(UserDto userDto,@Param("lat") String lat,@Param("lng") String lng);
+	public int getStoreCount(UserDto userDto,@Param("lat") String lat,@Param("lng") String lng,@Param("dong") String dong);
 
-	public int getEachCount(@Param("name")String str,@Param("lat") String lng,@Param("lng")String lat);
+	public int getEachCount(@Param("name")String str,@Param("lat") String lng,@Param("lng")String lat,@Param("dong") String dong);
 	
 	public int getWeight(@Param("id")String id,@Param("name") String storeName);
 }
