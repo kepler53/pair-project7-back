@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.mapper.BoardMapper">
+	
+	<insert id="addBoard">
+		insert into board_tb(board_title,board_regdate,board_content,user_id)
+		values(#{title},now(),#{content},#{user_id})
+	</insert>
+	
+	<select id="getBoardList" resultType="com.ssafy.happyhouse.dto.BoardDto">
+		select * from board_tb
+	</select>
+
+</mapper>
