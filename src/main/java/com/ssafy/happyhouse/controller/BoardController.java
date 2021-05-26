@@ -44,7 +44,7 @@ public class BoardController {
 		
 		
 		List<BoardDto> boardList = bservice.getBoardList();
-		System.out.println("여기왔니");
+//		System.out.println("여기왔니");
 		return new ResponseEntity<List<BoardDto>>(boardList,HttpStatus.OK);
 	}
 	

@@ -4,7 +4,7 @@
 	
 	<insert id="addBoard">
 		insert into board_tb(board_title,board_regdate,board_content,user_id)
-		values(#{title},now(),#{content},#{user_id})
+		values(#{board_title},now(),#{board_content},#{user_id})
 	</insert>
 	
 	<select id="getBoardList" resultType="com.ssafy.happyhouse.dto.BoardDto">
