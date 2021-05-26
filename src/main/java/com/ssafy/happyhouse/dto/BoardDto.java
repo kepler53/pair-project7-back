@@ -3,15 +3,15 @@ package com.ssafy.happyhouse.dto;
 public class BoardDto {
 	
 
-	private String title;
+	private String board_title;
 	private String board_regdate;
-	private String content;
+	private String board_content;
 	private String user_id;
-	public String getTitle() {
-		return title;
+	public String getBoard_title() {
+		return board_title;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBoard_title(String board_title) {
+		this.board_title = board_title;
 	}
 	public String getBoard_regdate() {
 		return board_regdate;
@@ -19,11 +19,11 @@ public class BoardDto {
 	public void setBoard_regdate(String board_regdate) {
 		this.board_regdate = board_regdate;
 	}
-	public String getContent() {
-		return content;
+	public String getBoard_content() {
+		return board_content;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setBoard_content(String board_content) {
+		this.board_content = board_content;
 	}
 	public String getUser_id() {
 		return user_id;
@@ -33,22 +33,21 @@ public class BoardDto {
 	}
 	@Override
 	public String toString() {
-		return "BoardDto [title=" + title + ", board_regdate=" + board_regdate + ", content=" + content + ", user_id="
-				+ user_id + ", getTitle()=" + getTitle() + ", getBoard_regdate()=" + getBoard_regdate()
-				+ ", getContent()=" + getContent() + ", getUser_id()=" + getUser_id() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+		return "BoardDto [board_title=" + board_title + ", board_regdate=" + board_regdate + ", board_content="
+				+ board_content + ", user_id=" + user_id + "]";
 	}
-	public BoardDto(String title, String board_regdate, String content, String user_id) {
+	public BoardDto(String board_title, String board_regdate, String board_content, String user_id) {
 		super();
-		this.title = title;
+		this.board_title = board_title;
 		this.board_regdate = board_regdate;
-		this.content = content;
+		this.board_content = board_content;
 		this.user_id = user_id;
 	}
 	public BoardDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 
 
 	
