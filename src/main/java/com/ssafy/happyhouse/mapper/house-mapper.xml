@@ -12,7 +12,7 @@
 	</insert>
 	
 	<select id="getHouseRentList" resultType="com.ssafy.happyhouse.dto.HouseDealDto">
-		select * from houserent_tb where dong = #{dong}
+		select * from houserent_tb where houserent_dong = #{dong}
 	</select>
 	
 </mapper>
