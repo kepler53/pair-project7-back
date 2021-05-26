@@ -11,7 +11,7 @@
 		values (#{dong},#{aptName},#{dealAmount},#{buildYear},#{floor},#{rentMoney},now(),#{lng},#{lat})
 	</insert>
 	
-	<select id="getHouseRentList" resultType="com.ssafy.happyhouse.dto.HouseDealDto">
+	<select id="getHouseRentList" resultType="com.ssafy.happyhouse.dto.HouseRentDto">
 		select * from houserent_tb where houserent_dong = #{dong}
 	</select>
 	
