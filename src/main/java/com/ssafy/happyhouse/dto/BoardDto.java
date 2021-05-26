@@ -2,7 +2,13 @@ package com.ssafy.happyhouse.dto;
 
 public class BoardDto {
 	
-
+	private String board_no;
+	public String getBoard_no() {
+		return board_no;
+	}
+	public void setBoard_no(String board_no) {
+		this.board_no = board_no;
+	}
 	private String board_title;
 	private String board_regdate;
 	private String board_content;
