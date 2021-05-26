@@ -11,4 +11,8 @@
 		values (#{dong},#{aptName},#{dealAmount},#{buildYear},#{floor},#{rentMoney},now(),#{lng},#{lat})
 	</insert>
 	
+	<select id="getHouseRentList" resultType="com.ssafy.happyhouse.dto.HouseDealDto">
+		select * from houserent_tb where dong = #{dong}
+	</select>
+	
 </mapper>

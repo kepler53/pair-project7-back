@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.dto.HouseDealDto;
 import com.ssafy.happyhouse.dto.HouseInfoDto;
+import com.ssafy.happyhouse.dto.HouseRentDto;
 import com.ssafy.happyhouse.dto.LegalCodeDto;
 import com.ssafy.happyhouse.dto.MapDto;
 import com.ssafy.happyhouse.service.ConvenienceService;
@@ -94,9 +95,9 @@ public class MapController {
 	}
 	
 	@GetMapping()
-	public ResponseEntity<List<HouseDealDto>> getHouseList(@RequestParam(value = "lng") String lng, @RequestParam(value = "lat") String lat){
+	public ResponseEntity<List<HouseRentDto>> getHouseList(@RequestParam(value = "lng") String lng, @RequestParam(value = "lat") String lat){
 		
-		List<HouseDealDto> list = new ArrayList<HouseDealDto>();
+		List<HouseRentDto> list = new ArrayList<HouseRentDto>();
 		String dong = "";
 		
 		try {
@@ -154,12 +155,12 @@ public class MapController {
 			
 		System.out.println(dong);
 		
-		list = mapservice.getHouseList(dong);
+		list = mapservice.getHouseRentList(dong);
 		
 		System.out.println(list.size());
 		
 		
-		return new ResponseEntity<List<HouseDealDto>>(list,HttpStatus.OK);
+		return new ResponseEntity<List<HouseRentDto>>(list,HttpStatus.OK);
 	}
 	
 	
