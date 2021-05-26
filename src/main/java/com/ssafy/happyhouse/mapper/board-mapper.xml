@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="getBoardList" resultType="com.ssafy.happyhouse.dto.BoardDto">
-		select * from board_tb
+		select * from board_tb order by board_regdate desc
 	</select>
 
 </mapper>
