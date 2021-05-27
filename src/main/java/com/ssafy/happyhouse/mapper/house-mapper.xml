@@ -11,8 +11,84 @@
 		values (#{dong},#{aptName},#{dealAmount},#{buildYear},#{floor},#{rentMoney},now(),#{lng},#{lat})
 	</insert>
 	
-	<select id="getHouseRentList" resultType="com.ssafy.happyhouse.dto.HouseRentDto">
+	
+	
+	<select id="getHouseRentList" resultMap="houseInfo">
 		select * from houserent_tb where houserent_dong = #{dong}
 	</select>
+	
+	<select id="convenience" resultType="com.ssafy.happyhouse.dto.ConvenienceDto">
+		select * from convenience_tb where no = #{no}
+	</select>
+	
+	
+	<resultMap type="com.ssafy.happyhouse.dto.HouseRentDto" id="houseInfo">
+		<result property="houserent_dong" column = "houserent_dong"/>
+		<collection property="convList" column="no" javaType="list" ofType="com.ssafy.happyhouse.dto.ConvenienceDto" select="convenience"></collection>
+	</resultMap>
+	
+	
+	<select id="getCoffee" resultType="int">
+		<![CDATA[
+		SELECT count(*)
+		FROM store_tb
+		where (6371*acos(cos(radians(#{lat}))*cos(radians(store_latitude))*cos(radians(store_longitude)
+		-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(store_latitude)))) <= 0.5 and store_classify_small like "%커피%"  
+		]]>
+	</select>
+	
+	<select id="getConv" resultType="int">
+		<![CDATA[
+		SELECT count(*)
+		FROM store_tb
+		where (6371*acos(cos(radians(#{lat}))*cos(radians(store_latitude))*cos(radians(store_longitude)
+		-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(store_latitude)))) <= 1.0 and store_classify like "%종합소매%"  
+		]]>
+	</select>
+	
+	
+	<select id="getSchool" resultType="int">
+		<![CDATA[
+		SELECT count(*)
+		FROM school_tb
+		where (6371*acos(cos(radians(#{lat}))*cos(radians(school_lat))*cos(radians(school_lng)
+		-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(school_lat)))) <= 0.5 
+		]]>
+	</select>
+	
+	<select id="getStation" resultType="int">
+		<![CDATA[
+		SELECT count(*)
+		FROM station_tb
+		where (6371*acos(cos(radians(#{lat}))*cos(radians(station_lat))*cos(radians(station_lng)
+		-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(station_lat)))) <= 0.4 
+		]]>
+	</select>
+	
+	<select id="getPolice" resultType="int">
+		<![CDATA[
+		SELECT count(*)
+		FROM police_tb
+		where (6371*acos(cos(radians(#{lat}))*cos(radians(police_lat))*cos(radians(police_lng)
+		-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(police_lat)))) <= 1.0 
+		]]>
+	</select>
+	
+	
+	<insert id="addHouseRent" parameterType="com.ssafy.happyhouse.dto.HouseRentDto">
+		insert into houserent_tb(houserent_name,houserent_floor,houserent_buildTypeName,houserent_area,houserent_rentType,houserent_deposit,houserent_fee,houserent_city,houserent_gu,houserent_dong,houserent_address,houserent_lat,houserent_lng,jisu)
+		values(#{houserent_name},#{houserent_floor},#{houserent_buildTypeName},#{houserent_area},#{houserent_rentType},#{houserent_deposit},#{houserent_fee},#{houserent_city},#{houserent_gu},#{houserent_dong},#{houserent_address},#{houserent_lat},#{houserent_lng},#{jisu})
+	    <selectKey resultType="int" keyProperty="no" order="AFTER">
+        	SELECT LAST_INSERT_ID()
+    	</selectKey>   
+	</insert>
+	
+	<insert id="insertConv">
+		insert into convenience_tb(no,coffee,convenience,school,cctv,police)
+		values (#{no},#{coffee},#{convenience},#{school},#{cctv},#{police})
+	</insert>
+	
+	
+	
 	
 </mapper>

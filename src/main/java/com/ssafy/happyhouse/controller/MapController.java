@@ -237,7 +237,7 @@ public class MapController {
         }
 		
 		LegalCodeDto legalCodeDto = new LegalCodeDto(legalcode,city,gu,dong);
-//		System.out.println(legalCodeDto);
+		System.out.println(legalCodeDto);
 		
 //		HouseInfoDto houseInfoDto = cservice.getConvenienceScore(id, lat, lng, dong);
 		return new ResponseEntity<LegalCodeDto>(legalCodeDto,HttpStatus.OK);

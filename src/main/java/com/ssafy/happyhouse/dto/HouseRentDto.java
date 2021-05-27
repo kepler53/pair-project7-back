@@ -1,12 +1,22 @@
 package com.ssafy.happyhouse.dto;
 
+import java.util.Date;
+import java.util.List;
+
 public class HouseRentDto {
-	
+	private int no;
 	private String houserent_no;
+	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	private String houserent_code;
 	private String houserent_name;
 	private String houserent_floor;
-	private String houserent_buildType;
+	private String houserent_Buildtype;
 	private String houserent_buildTypeName;
 	private String houserent_area;
 	private String houserent_rentTypeCode;
@@ -24,20 +34,15 @@ public class HouseRentDto {
 	private String houserent_address;
 	private String houserent_lat;
 	private String houserent_lng;
-	@Override
-	public String toString() {
-		return "HouseRentDto [houserent_no=" + houserent_no + ", houserent_code=" + houserent_code + ", houserent_name="
-				+ houserent_name + ", houserent_floor=" + houserent_floor + ", houserent_buildType="
-				+ houserent_buildType + ", houserent_buildTypeName=" + houserent_buildTypeName + ", houserent_area="
-				+ houserent_area + ", houserent_rentTypeCode=" + houserent_rentTypeCode + ", houserent_rentType="
-				+ houserent_rentType + ", houserent_deposit=" + houserent_deposit + ", houserent_fee=" + houserent_fee
-				+ ", houserent_buildYear=" + houserent_buildYear + ", houserent_city=" + houserent_city
-				+ ", houserent_gu=" + houserent_gu + ", houserent_dong=" + houserent_dong + ", houserent_li="
-				+ houserent_li + ", houserent_gubun=" + houserent_gubun + ", houserent_bonbun=" + houserent_bonbun
-				+ ", houserent_bubun=" + houserent_bubun + ", houserent_address=" + houserent_address
-				+ ", houserent_lat=" + houserent_lat + ", houserent_lng=" + houserent_lng + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	private int jisu;
+	public int getJisu() {
+		return jisu;
 	}
+	public void setJisu(int jisu) {
+		this.jisu = jisu;
+	}
+	private List<ConvenienceDto> convList;
+
 	public String getHouserent_no() {
 		return houserent_no;
 	}
@@ -62,11 +67,11 @@ public class HouseRentDto {
 	public void setHouserent_floor(String houserent_floor) {
 		this.houserent_floor = houserent_floor;
 	}
-	public String getHouserent_buildType() {
-		return houserent_buildType;
+	public String getHouserent_Buildtype() {
+		return houserent_Buildtype;
 	}
-	public void setHouserent_buildType(String houserent_buildType) {
-		this.houserent_buildType = houserent_buildType;
+	public void setHouserent_Buildtype(String houserent_Buildtype) {
+		this.houserent_Buildtype = houserent_Buildtype;
 	}
 	public String getHouserent_buildTypeName() {
 		return houserent_buildTypeName;
@@ -170,40 +175,16 @@ public class HouseRentDto {
 	public void setHouserent_lng(String houserent_lng) {
 		this.houserent_lng = houserent_lng;
 	}
-	public HouseRentDto(String houserent_no, String houserent_code, String houserent_name, String houserent_floor,
-			String houserent_buildType, String houserent_buildTypeName, String houserent_area,
-			String houserent_rentTypeCode, String houserent_rentType, String houserent_deposit, String houserent_fee,
-			String houserent_buildYear, String houserent_city, String houserent_gu, String houserent_dong,
-			String houserent_li, String houserent_gubun, String houserent_bonbun, String houserent_bubun,
-			String houserent_address, String houserent_lat, String houserent_lng) {
-		super();
-		this.houserent_no = houserent_no;
-		this.houserent_code = houserent_code;
-		this.houserent_name = houserent_name;
-		this.houserent_floor = houserent_floor;
-		this.houserent_buildType = houserent_buildType;
-		this.houserent_buildTypeName = houserent_buildTypeName;
-		this.houserent_area = houserent_area;
-		this.houserent_rentTypeCode = houserent_rentTypeCode;
-		this.houserent_rentType = houserent_rentType;
-		this.houserent_deposit = houserent_deposit;
-		this.houserent_fee = houserent_fee;
-		this.houserent_buildYear = houserent_buildYear;
-		this.houserent_city = houserent_city;
-		this.houserent_gu = houserent_gu;
-		this.houserent_dong = houserent_dong;
-		this.houserent_li = houserent_li;
-		this.houserent_gubun = houserent_gubun;
-		this.houserent_bonbun = houserent_bonbun;
-		this.houserent_bubun = houserent_bubun;
-		this.houserent_address = houserent_address;
-		this.houserent_lat = houserent_lat;
-		this.houserent_lng = houserent_lng;
+
+	public List<ConvenienceDto> getConvList() {
+		return convList;
 	}
-	public HouseRentDto() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setConvList(List<ConvenienceDto> convList) {
+		this.convList = convList;
 	}
+	
+	
+	
 	
 	
 
