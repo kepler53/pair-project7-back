@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.mapper.PreProcessMapper">
+	
+	<select id="getHouseRent" resultType="com.ssafy.happyhouse.dto.HouseRentDto">
+		select * from houserent_tb;
+	</select>
+	
+	<update id="updateHouseRent">
+	update houserent_tb
+	set houserent_lat = #{lat}, houserent_lng = #{lng}
+	where houserent_address = #{address}
+	</update>
+
+</mapper>
