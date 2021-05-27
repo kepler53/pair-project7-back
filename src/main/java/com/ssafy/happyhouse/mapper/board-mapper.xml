@@ -10,5 +10,27 @@
 	<select id="getBoardList" resultType="com.ssafy.happyhouse.dto.BoardDto">
 		select * from board_tb order by board_regdate desc
 	</select>
+	
+	<update id="updateCnt">
+		update board_tb
+		set board_count = board_count + 1
+		where board_no = #{no}
+	</update>
+	
+	<select id="getBoard" resultType="com.ssafy.happyhouse.dto.BoardDto">
+		select *
+		from board_tb
+		where board_no = #{no}
+	</select>
+	
+	<update id="updateBoard">
+		update board_tb
+		set board_title = #{board_title}, board_content = #{board_content}
+		where board_no = #{board_no}
+	</update>
+	
+	<delete id="deleteBoard">
+		delete from board_tb where board_no = #{no}
+	</delete>
 
 </mapper>

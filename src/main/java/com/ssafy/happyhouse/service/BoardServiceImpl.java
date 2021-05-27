@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.service;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,6 +18,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public String addBoard(BoardDto boardDto) throws Exception {
+		
+		
 		
 		int result = template.getMapper(BoardMapper.class).addBoard(boardDto);
 		
@@ -39,5 +42,44 @@ public class BoardServiceImpl implements BoardService {
 			return bList;
 		}
 	}
+
+	@Override
+	public BoardDto getBoard(int no) {
+		
+		int updateCnt = template.getMapper(BoardMapper.class).updateCnt(no);
+		if(updateCnt==0) {
+			System.out.println("update");
+		}
+		
+		BoardDto boardDto = template.getMapper(BoardMapper.class).getBoard(no);
+		
+		return boardDto;
+	}
+
+	@Override
+	public String updateBoard(BoardDto boardDto) throws Exception {
+		
+		int result = template.getMapper(BoardMapper.class).updateBoard(boardDto);
+		if(result>0) {
+			return "성공";
+		}else {
+			throw new Exception();
+		}
+	}
+
+	@Override
+	public String deleteBoard(String no) throws Exception{
+		int result = template.getMapper(BoardMapper.class).deleteBoard(no);
+		if(result>0) {
+			return "성공";
+		}else {
+			throw new Exception();
+		}
+	}
+	
+	
+	
+	
+	
 
 }

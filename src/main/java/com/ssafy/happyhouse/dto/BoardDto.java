@@ -2,6 +2,14 @@ package com.ssafy.happyhouse.dto;
 
 public class BoardDto {
 	
+	
+	private int board_count;
+	public int getBoard_count() {
+		return board_count;
+	}
+	public void setBoard_count(int board_count) {
+		this.board_count = board_count;
+	}
 	private String board_no;
 	public String getBoard_no() {
 		return board_no;
